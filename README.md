@@ -1,0 +1,1 @@
+Karma, browserify, angularjs, gulp SEED
