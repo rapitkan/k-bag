@@ -1,8 +1,10 @@
 doctype html
-html
+html(ng-app="myApp")
   head
     title Example app
   body
-    h1 This is an example app
+    h1 This is an example application
     p This is a paragraph
-    script(src="index.js")
+    div(ng-view)
+    script(src="bundle.js")
+    script(src="angular-mocks.js")

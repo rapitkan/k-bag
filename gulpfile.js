@@ -8,11 +8,16 @@
       scss = require('gulp-ruby-sass'),
       connect = require('gulp-connect'),
       jshint = require('gulp-jshint'),
+      watchify = require('watchify'),
+      source = require('vinyl-source-stream'),
       karma = require('gulp-karma');
 
+/*******************
+* TASKS
+*******************/
   gulp.task('browserify', function() {
       // Single entry point to browserify
-      gulp.src('./dev/index.js')
+      gulp.src('./dev/index.min.js')
           .pipe(browserify({
             insertGlobals: true,
             debug: true
@@ -22,7 +27,7 @@
   });
 
   gulp.task('jshint', function() {
-    gulp.src('./src/scripts/*.js')
+    gulp.src(['./dev/index.js', './dev/**/*.js'])
       .pipe(jshint())
       .pipe(jshint.reporter('default'));
   });
@@ -41,15 +46,8 @@
     });
   });
 
-  var testFiles = [
-    'client/todo.js',
-    'client/todo.util.js',
-    'client/todo.App.js',
-    'test/client/*.js'
-  ];
-
   gulp.task('test', function() {
-    gulp.src(testFiles)
+    gulp.src('./foobar')
       .pipe(karma({
         configFile: 'karma.conf.js',
         action: 'watch'
@@ -58,10 +56,23 @@
 
   gulp.task('watch', ['jshint'], function () {
     // Watch jade files
-    gulp.watch(['./dev/index.jade', './dev/**/*.jade'], ['views']);
-    // Watch js files
-    gulp.watch(['./dev/index.js', './dev/**/*.js'], ['jshint', 'browserify']);
+    gulp.watch(['./dev/index.jade', './dev/**/*.jade'], { maxListeners: 999 }, ['views']);
+    // Watch js files    
+    var bundler = watchify('./dev/index.js');
+    bundler.on('update', rebundle);
+    function rebundle() {
+        return bundler.bundle()
+            .pipe(source('bundle.js'))
+            .pipe(gulp.dest('./dist/'));
+    }
+    return rebundle();
+  
+    // gulp.watch(['./dev/index.js', './dev/**/*.js'], { maxListeners: 999 }, ['jshint', 'browserify']);
   });
 
-  gulp.task('dev', ['connect', 'views', 'browserify', 'test', 'watch']);
+/*******************
+* MAIN TASKS
+*******************/
+  gulp.task('dev', ['connect', 'views', 'browserify', 'watch']);
+
 }());

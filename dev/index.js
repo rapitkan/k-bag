@@ -1,11 +1,16 @@
-(function () {
+module.exports = function () {
 
-	"use strict";
+  "use strict";
 
-	var angular = require('angular');
-  console.info(angular);
-  angular.module('myApp', [
+  var angular = require('angular');
+  var routes = require('./routes.js');
 
-  ]);
-		//app = angular.module('myApp', []);	
-}());
+  require('angular-router-browserify')(angular);
+
+  var myApp = angular.module('myApp', ['ngRoute']);
+
+  myApp.config(routes);
+
+  return myApp;
+
+};
