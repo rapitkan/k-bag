@@ -2,7 +2,10 @@
 
 	"use strict";
 
-	var angular = require('angular'),
-		app = angular.module('myApp', []);
-	console.info(angular, app);
+	var angular = require('angular');
+  console.info(angular);
+  angular.module('myApp', [
+
+  ]);
+		//app = angular.module('myApp', []);	
 }());

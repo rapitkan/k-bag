@@ -7,7 +7,8 @@
       jade = require('gulp-jade'),
       scss = require('gulp-ruby-sass'),
       connect = require('gulp-connect'),
-      jshint = require('gulp-jshint');
+      jshint = require('gulp-jshint'),
+      karma = require('gulp-karma');
 
   gulp.task('browserify', function() {
       // Single entry point to browserify
@@ -40,6 +41,21 @@
     });
   });
 
+  var testFiles = [
+    'client/todo.js',
+    'client/todo.util.js',
+    'client/todo.App.js',
+    'test/client/*.js'
+  ];
+
+  gulp.task('test', function() {
+    gulp.src(testFiles)
+      .pipe(karma({
+        configFile: 'karma.conf.js',
+        action: 'watch'
+      }));
+  });
+
   gulp.task('watch', ['jshint'], function () {
     // Watch jade files
     gulp.watch(['./dev/index.jade', './dev/**/*.jade'], ['views']);
@@ -47,5 +63,5 @@
     gulp.watch(['./dev/index.js', './dev/**/*.js'], ['jshint', 'browserify']);
   });
 
-  gulp.task('dev', ['connect', 'views', 'browserify', 'watch']);
+  gulp.task('dev', ['connect', 'views', 'browserify', 'test', 'watch']);
 }());
