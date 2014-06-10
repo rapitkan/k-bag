@@ -6,6 +6,6 @@ module.exports = ['$routeProvider', '$httpProvider',
     }).when('/view2', { 
       templateUrl: './views/view1.html', 
       controller: 'MyCtrl2'
-    }).otherwise({redirectTo: 'testi'});
+    }).otherwise({redirectTo: 'http://www.google.fi'});
   }
 ];

@@ -10,6 +10,7 @@
       jshint = require('gulp-jshint'),
       watchify = require('watchify'),
       source = require('vinyl-source-stream'),
+      rename = require('gulp-rename'),
       karma = require('gulp-karma');
 
 /*******************
@@ -17,13 +18,14 @@
 *******************/
   gulp.task('browserify', function() {
       // Single entry point to browserify
-      gulp.src('./dev/index.min.js')
+      gulp.src(['./dev/index.js', './dev/angular-mocks.js'])
           .pipe(browserify({
             insertGlobals: true,
             debug: true
           }))
-          .pipe(connect.reload())
-          .pipe(gulp.dest('./dist'));
+          .pipe(rename('bundle.js'))
+          .pipe(gulp.dest('./dist'))
+          .pipe(connect.reload());
   });
 
   gulp.task('jshint', function() {
@@ -46,7 +48,7 @@
     });
   });
 
-  gulp.task('test', function() {
+  gulp.task('karma', function() {
     gulp.src('./foobar')
       .pipe(karma({
         configFile: 'karma.conf.js',
@@ -55,24 +57,26 @@
   });
 
   gulp.task('watch', ['jshint'], function () {
+    function rebundle() {
+      return bundler.bundle().pipe(source('bundle.js')).pipe(gulp.dest('./dist/'));
+    }
     // Watch jade files
     gulp.watch(['./dev/index.jade', './dev/**/*.jade'], { maxListeners: 999 }, ['views']);
-    // Watch js files    
-    var bundler = watchify('./dev/index.js');
+    // Watch the main js file
+    var bundler = watchify(['./dev/index.js', './dev/angular-mocks'], {
+      debug: true
+    });
     bundler.on('update', rebundle);
-    function rebundle() {
-        return bundler.bundle()
-            .pipe(source('bundle.js'))
-            .pipe(gulp.dest('./dist/'));
-    }
     return rebundle();
-  
-    // gulp.watch(['./dev/index.js', './dev/**/*.js'], { maxListeners: 999 }, ['jshint', 'browserify']);
   });
 
 /*******************
 * MAIN TASKS
 *******************/
-  gulp.task('dev', ['connect', 'views', 'browserify', 'watch']);
+  gulp.task('dev', ['connect', 'views', 'watch']);
+
+  gulp.task('test', ['karma']);
+
+  gulp.task('build', ['views', 'browserify']);
 
 }());
