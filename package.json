@@ -31,6 +31,7 @@
     "gulp-rename": "^1.2.0",
     "gulp-ruby-sass": "^0.5.0",
     "gulp-util": "^2.2.16",
+    "jshint-stylish": "^0.2.0",
     "karma": "^0.12.16",
     "karma-browserify": "^0.2.1",
     "karma-browserify-preprocessor": "^0.1.0",

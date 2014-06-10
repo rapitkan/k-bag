@@ -1,5 +1,5 @@
-module.exports = ['$routeProvider', '$httpProvider',  
-  function($routeProvider, $httpProvider) {
+module.exports = ['$routeProvider', '$locationProvider',  
+  function($routeProvider, $locationProvider) {
     $routeProvider.when('/view1', {
       templateUrl: './views/view1.html', 
       controller: 'MyCtrl1'
@@ -7,5 +7,7 @@ module.exports = ['$routeProvider', '$httpProvider',
       templateUrl: './views/view1.html', 
       controller: 'MyCtrl2'
     }).otherwise({redirectTo: 'http://www.google.fi'});
+
+    $locationProvider.html5Mode(false);
   }
 ];

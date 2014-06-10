@@ -31,8 +31,10 @@
 
   gulp.task('jshint', function() {
     gulp.src(['./dev/index.js', './dev/**/*.js'])
-      .pipe(jshint())
-      .pipe(jshint.reporter('default'));
+      .pipe(jshint('.jshintrc'))
+      .pipe(jshint.reporter('jshint-stylish'));
+      /*.pipe(jshint())
+      .pipe(jshint.reporter('default'));*/
   });
 
   gulp.task('views', function () {
