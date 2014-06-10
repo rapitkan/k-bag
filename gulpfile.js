@@ -18,8 +18,9 @@
 *******************/
   gulp.task('browserify', function() {
       // Single entry point to browserify
-      gulp.src(['./dev/index.js', './dev/angular-mocks.js'])
+      gulp.src(['./dev/index.js'])
           .pipe(browserify({
+            transform: ["debowerify"],
             insertGlobals: true,
             debug: true
           }))
@@ -57,23 +58,16 @@
   });
 
   gulp.task('watch', ['jshint'], function () {
-    function rebundle() {
-      return bundler.bundle().pipe(source('bundle.js')).pipe(gulp.dest('./dist/'));
-    }
     // Watch jade files
     gulp.watch(['./dev/index.jade', './dev/**/*.jade'], { maxListeners: 999 }, ['views']);
     // Watch the main js file
-    var bundler = watchify(['./dev/index.js', './dev/angular-mocks'], {
-      debug: true
-    });
-    bundler.on('update', rebundle);
-    return rebundle();
+    gulp.watch(['./dev/index.js', './dev/**/*.js'], { maxListeners: 999}, ['browserify']);
   });
 
 /*******************
 * MAIN TASKS
 *******************/
-  gulp.task('dev', ['connect', 'views', 'watch']);
+  gulp.task('dev', ['connect', 'views', 'browserify', 'watch']);
 
   gulp.task('test', ['karma']);
 

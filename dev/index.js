@@ -2,10 +2,10 @@
 
   "use strict";
 
-  var angular = require('angular');
+  require('angular');  
+  require('angular-route');
+  
   var routes = require('./routes.js');
-
-  require('angular-router-browserify')(angular);
 
   var myApp = angular.module('myApp', ['ngRoute']);
 
