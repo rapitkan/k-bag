@@ -1,0 +1,3 @@
+[submodule "once"]
+	path = once
+	url = https://github.com/niant/once.git

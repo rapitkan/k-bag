@@ -51,6 +51,18 @@
     });
   });
 
+  gulp.task('scss', function () {
+    gulp.src('.dev/app.scss')
+      .pipe(sass({sourcemap: true}))
+      .pipe(gulp.dest('dist'));    
+  });
+
+  gulp.task('copy-images', function () {
+    gulp.src('.dev/images/*.*')
+      .pipe(sass({sourcemap: true}))
+      .pipe(gulp.dest('dist'));    
+  });
+
   gulp.task('karma', function() {
     gulp.src('./foobar')
       .pipe(karma({
@@ -69,10 +81,10 @@
 /*******************
 * MAIN TASKS
 *******************/
-  gulp.task('dev', ['connect', 'views', 'browserify', 'watch']);
+  gulp.task('dev', ['connect', 'views', 'browserify', 'scss', 'copy-image', 'watch']);
 
   gulp.task('test', ['karma']);
 
-  gulp.task('build', ['views', 'browserify']);
+  gulp.task('build', ['views', 'browserify', 'scss', 'copy-image']);
 
 }());
