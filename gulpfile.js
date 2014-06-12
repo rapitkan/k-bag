@@ -9,7 +9,6 @@
       scss = require('gulp-ruby-sass'),
       connect = require('gulp-connect'),
       jshint = require('gulp-jshint'),
-      watchify = require('watchify'),
       source = require('vinyl-source-stream'),
       rename = require('gulp-rename'),
       karma = require('gulp-karma');
@@ -19,7 +18,7 @@
 *******************/
   gulp.task('browserify', function() {
       // Single entry point to browserify
-      gulp.src(['./dev/index.js'])
+      gulp.src([projectStructure.dev + '/index.js'])
           .pipe(browserify({
             transform: ["debowerify"],
             insertGlobals: true,
@@ -80,10 +79,10 @@
 /*******************
 * MAIN TASKS
 *******************/
-  gulp.task('dev', ['connect', 'views', 'browserify', 'scss', 'copy-image', 'watch']);
+  gulp.task('dev', ['connect', 'views', 'browserify', 'scss', 'copy-images', 'watch']);
 
   gulp.task('test', ['karma']);
 
-  gulp.task('build', ['views', 'browserify', 'scss', 'copy-image']);
+  gulp.task('build', ['views', 'browserify', 'scss', 'copy-images']);
 
 }());
