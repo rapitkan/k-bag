@@ -51,7 +51,7 @@
   });
 
   gulp.task('scss', function () {
-    gulp.src([project.devFolder + '/app.scss'])
+    gulp.src([project.devFolder + '/index.scss'])
       .pipe(scss({sourcemap: true}))
       .pipe(gulp.dest(project.distFolder));
   });
