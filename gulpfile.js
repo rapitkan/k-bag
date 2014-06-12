@@ -8,6 +8,7 @@
       jade = require('gulp-jade'),
       scss = require('gulp-ruby-sass'),
       connect = require('gulp-connect'),
+      debug = require('gulp-debug'),
       jshint = require('gulp-jshint'),
       source = require('vinyl-source-stream'),
       rename = require('gulp-rename'),
