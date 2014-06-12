@@ -3,7 +3,7 @@
   'use strict';
 
   var gulp = require('gulp'),
-      projectStructure = require('../projectStructure.json'),
+      project = require('../projectStructure.json'),
       browserify = require('gulp-browserify'),
       jade = require('gulp-jade'),
       scss = require('gulp-ruby-sass'),
@@ -18,46 +18,46 @@
 *******************/
   gulp.task('browserify', function() {
       // Single entry point to browserify
-      gulp.src([projectStructure.dev + '/index.js'])
+      gulp.src([project.devFolder + '/index.js'])
           .pipe(browserify({
             transform: ["debowerify"],
             insertGlobals: true,
             debug: true
           }))
           .pipe(rename('bundle.js'))
-          .pipe(gulp.dest('./dist'))
+          .pipe(gulp.dest(project.devFolder))
           .pipe(connect.reload());
   });
 
   gulp.task('jshint', function() {
-    gulp.src(['./dev/index.js', './dev/**/*.js'])
+    gulp.src([project.devFolder + '/index.js', project.devFolder + '/**/*.js'])
       .pipe(jshint('.jshintrc'))
       .pipe(jshint.reporter('jshint-stylish'));
   });
 
   gulp.task('views', function () {
-    gulp.src('./dev/index.jade')
+    gulp.src(project.devFolder + '/index.jade')
         .pipe(jade())
         .pipe(connect.reload())
-        .pipe(gulp.dest('./dist'));
+        .pipe(gulp.dest(project.distFolder));
   });
 
   gulp.task('connect', function () {
     connect.server({
-      root: './dist',
+      root: project.distFolder,
       livereload: true
     });
   });
 
   gulp.task('scss', function () {
-    gulp.src(['.dev/app.scss'])
+    gulp.src([project.devFolder + '/app.scss'])
       .pipe(scss({sourcemap: true}))
-      .pipe(gulp.dest('dist/styles'));
+      .pipe(gulp.dest(project.distFolder + '/styles'));
   });
 
   gulp.task('copy-images', function () {
-    gulp.src('.dev/images/*.*')
-      .pipe(gulp.dest('dist'));
+    gulp.src(project.devFolder + '/images/*.*')
+      .pipe(gulp.dest(project.distFolder));
   });
 
   gulp.task('karma', function() {
@@ -70,9 +70,9 @@
 
   gulp.task('watch', ['jshint'], function () {
     // Watch jade files
-    gulp.watch(['./dev/index.jade', './dev/**/*.jade'], { maxListeners: 999 }, ['views']);
+    gulp.watch([project.devFolder +'/index.jade', project.devFolder + '/**/*.jade'], { maxListeners: 999 }, ['views']);
     // Watch the main js file
-    gulp.watch(['./dev/index.js', './dev/**/*.js'], { maxListeners: 999}, ['browserify']);
+    gulp.watch([project.devFolder + '/index.js', project.devFolder + '/**/*.js'], { maxListeners: 999}, ['browserify']);
   });
 
 /*******************
