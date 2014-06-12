@@ -19,7 +19,7 @@
 *******************/
   gulp.task('browserify', function() {
       // Single entry point to browserify
-      gulp.src(['./dev/index.js'])
+      gulp.src([projectStructure.dev + '/index.js'])
           .pipe(browserify({
             transform: ["debowerify"],
             insertGlobals: true,
