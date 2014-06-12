@@ -26,7 +26,7 @@
             debug: true
           }))
           .pipe(rename('bundle.js'))
-          .pipe(gulp.dest(project.devFolder))
+          .pipe(gulp.dest(project.distFolder))
           .pipe(connect.reload());
   });
 
