@@ -41,8 +41,6 @@
     "karma-phantomjs-launcher": "^0.1.4",
     "karma-safari-launcher": "^0.1.1",
     "mocha": "^1.20.1",
-    "scriptjs": "^2.5.3",
-    "vinyl-source-stream": "^0.1.1",
-    "watchify": "^0.10.2"
+    "vinyl-source-stream": "^0.1.1"
   }
 }
