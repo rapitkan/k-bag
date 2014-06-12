@@ -37,7 +37,7 @@
   });
 
   gulp.task('views', function () {
-    gulp.src(project.devFolder + '/index.jade')
+    gulp.src([project.devFolder + '/index.jade', project.devFolder + '/**/*.jade'])
         .pipe(jade())
         .pipe(connect.reload())
         .pipe(gulp.dest(project.distFolder));
@@ -53,7 +53,7 @@
   gulp.task('scss', function () {
     gulp.src([project.devFolder + '/app.scss'])
       .pipe(scss({sourcemap: true}))
-      .pipe(gulp.dest(project.distFolder + '/styles'));
+      .pipe(gulp.dest(project.distFolder));
   });
 
   gulp.task('copy-images', function () {
