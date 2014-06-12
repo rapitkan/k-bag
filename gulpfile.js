@@ -3,6 +3,7 @@
   'use strict';
 
   var gulp = require('gulp'),
+      projectStructure = require('../projectStructure.json'),
       browserify = require('gulp-browserify'),
       jade = require('gulp-jade'),
       scss = require('gulp-ruby-sass'),
@@ -33,8 +34,6 @@
     gulp.src(['./dev/index.js', './dev/**/*.js'])
       .pipe(jshint('.jshintrc'))
       .pipe(jshint.reporter('jshint-stylish'));
-      /*.pipe(jshint())
-      .pipe(jshint.reporter('default'));*/
   });
 
   gulp.task('views', function () {
@@ -52,9 +51,9 @@
   });
 
   gulp.task('scss', function () {
-    gulp.src('.dev/app.scss')
+    gulp.src(['.dev/app.scss'])
       .pipe(sass({sourcemap: true}))
-      .pipe(gulp.dest('dist'));    
+      .pipe(gulp.dest('dist/styles'));
   });
 
   gulp.task('copy-images', function () {

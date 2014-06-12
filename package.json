@@ -4,6 +4,7 @@
   "description": "Example application",
   "main": "index.js",
   "scripts": {
+    "start": "gulp dev",
     "test": "test",
     "dev": "gulp dev"
   },
