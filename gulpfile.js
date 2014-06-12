@@ -51,7 +51,7 @@
 
   gulp.task('scss', function () {
     gulp.src(['.dev/app.scss'])
-      .pipe(sass({sourcemap: true}))
+      .pipe(scss({sourcemap: true}))
       .pipe(gulp.dest('dist/styles'));
   });
 
