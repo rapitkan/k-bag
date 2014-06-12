@@ -57,8 +57,7 @@
 
   gulp.task('copy-images', function () {
     gulp.src('.dev/images/*.*')
-      .pipe(sass({sourcemap: true}))
-      .pipe(gulp.dest('dist'));    
+      .pipe(gulp.dest('dist'));
   });
 
   gulp.task('karma', function() {
