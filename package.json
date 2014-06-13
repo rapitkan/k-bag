@@ -26,6 +26,7 @@
     "gulp-jade": "^0.5.0",
     "gulp-jshint": "^1.6.2",
     "gulp-karma": "0.0.4",
+    "gulp-protractor": "0.0.7",
     "gulp-rename": "^1.2.0",
     "gulp-ruby-sass": "^0.5.0",
     "gulp-util": "^2.2.16",
@@ -42,6 +43,7 @@
     "karma-phantomjs-launcher": "^0.1.4",
     "karma-safari-launcher": "^0.1.1",
     "mocha": "^1.20.1",
+    "protractor": "^0.24.1",
     "vinyl-source-stream": "^0.1.1"
   }
 }
