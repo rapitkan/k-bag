@@ -10,7 +10,7 @@
       concat = require('gulp-concat'),
       connect = require('gulp-connect'),
       debug = require('gulp-debug'),
-      uglify = require('gulp-uglify');
+      uglify = require('gulp-uglify'),
       jshint = require('gulp-jshint'),
       source = require('vinyl-source-stream'),
       rename = require('gulp-rename'),
