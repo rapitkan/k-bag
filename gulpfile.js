@@ -7,11 +7,14 @@
       browserify = require('gulp-browserify'),
       jade = require('gulp-jade'),
       scss = require('gulp-ruby-sass'),
+      concat = require('gulp-concat'),
       connect = require('gulp-connect'),
       debug = require('gulp-debug'),
+      uglify = require('gulp-uglify');
       jshint = require('gulp-jshint'),
       source = require('vinyl-source-stream'),
       rename = require('gulp-rename'),
+      sourcemaps = require('gulp-sourcemaps'),
       // For unit tests
       karma = require('gulp-karma'),
       // For e2e tests:
@@ -23,15 +26,24 @@
 *******************/
   gulp.task('browserify', function() {
       // Single entry point to browserify
-      gulp.src([project.devFolder + '/index.js'])
+      gulp.src(project.devFolder + '/index.js')
           .pipe(browserify({
             transform: ["debowerify"],
             insertGlobals: true,
             debug: true
           }))
           .pipe(rename('bundle.js'))
-          .pipe(gulp.dest(project.distFolder))
+          .pipe(gulp.dest(project.distFolder))          
           .pipe(connect.reload());
+  });
+
+  gulp.task('scripts', function () {
+    gulp.src(project.devFolder + '/**/*.js'))
+      .pipe(sourcemaps.init())
+        .pipe(concat('project.js'))
+        .pipe(uglify())
+      .pipe(sourcemaps.write())
+      .pipe(gulp.dest(project.distFolder))
   });
 
   gulp.task('jshint', function() {
@@ -93,10 +105,10 @@
 /*******************
 * MAIN TASKS
 *******************/
-  gulp.task('dev', ['connect', 'views', 'browserify', 'scss', 'copy-images', 'watch']);
+  gulp.task('dev', ['connect', 'views', 'scripts', 'browserify', 'scss', 'copy-images', 'watch']);
 
   gulp.task('test', ['karma']);
 
-  gulp.task('build', ['views', 'browserify', 'scss', 'copy-images']);
+  gulp.task('build', ['views', 'scripts', 'browserify', 'scss', 'copy-images']);
 
 }());
