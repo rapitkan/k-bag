@@ -12,7 +12,11 @@
       jshint = require('gulp-jshint'),
       source = require('vinyl-source-stream'),
       rename = require('gulp-rename'),
-      karma = require('gulp-karma');
+      // For unit tests
+      karma = require('gulp-karma'),
+      // For e2e tests:
+      protractor = require("gulp-protractor").protractor,
+      webdriver_update = require('gulp-protractor').webdriver_update;
 
 /*******************
 * TASKS
@@ -67,6 +71,16 @@
         configFile: 'karma.conf.js',
         action: 'watch'
       }));
+  });
+
+  gulp.task('webdriver_update', webdriver_update);
+
+  gulp.task('test-e2e', ['webdriver_update'], function(cb) {
+      gulp.src(project.protractor.testFolder).pipe(protractor({
+          configFile: project.protractor.configFile,
+      })).on('error', function(e) {
+          console.log(e);
+      }).on('end', cb);
   });
 
   gulp.task('watch', ['jshint'], function () {
