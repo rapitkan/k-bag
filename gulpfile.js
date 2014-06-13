@@ -38,7 +38,7 @@
   });
 
   gulp.task('scripts', function () {
-    gulp.src(project.devFolder + '/**/*.js'))
+    gulp.src(project.devFolder + '/**/*.js')
       .pipe(sourcemaps.init())
         .pipe(concat('project.js'))
         .pipe(uglify())
