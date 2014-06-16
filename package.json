@@ -6,7 +6,8 @@
   "scripts": {
     "start": "gulp dev",
     "test": "test",
-    "dev": "gulp dev"
+    "dev": "gulp dev",
+	"build": "gulp build"
   },
   "author": "Raimo Pitkänen",
   "license": "ISC",
@@ -46,6 +47,9 @@
     "karma-safari-launcher": "^0.1.1",
     "mocha": "^1.20.1",
     "protractor": "^0.24.1",
-    "vinyl-source-stream": "^0.1.1"
+    "vinyl-source-stream": "^0.1.1",
+    "selenium-server": "2.38.0",
+    "jasmine-reporters": "0.4.1",
+    "astrolabe": "0.3.4-alpha"
   }
 }
