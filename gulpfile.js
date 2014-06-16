@@ -35,12 +35,31 @@
           .pipe(rename('bundle.js'))
           .pipe(gulp.dest(project.distFolder))          
           .pipe(connect.reload());
+      gulp.src(project.devFolder + '/modules/login/loginService.js')
+          .pipe(browserify({
+            insertGlobals: true,
+            debug: true
+          }))
+          .pipe(gulp.dest(project.distFolder))
+          .pipe(connect.reload());
+      gulp.src(project.devFolder + '/modules/login/loginController.js')
+          .pipe(browserify({
+            insertGlobals: true,
+            debug: true
+          }))          
+          .pipe(gulp.dest(project.distFolder))
+          .pipe(connect.reload());
   });
 
   gulp.task('scripts', function () {
     gulp.src(project.devFolder + '/**/*.js')
       .pipe(sourcemaps.init())
         .pipe(concat('project.js'))
+        .pipe(browserify({
+          transform: ["debowerify"],
+          insertGlobals: true,
+          debug: true
+        }))
         .pipe(uglify())
       .pipe(sourcemaps.write())
       .pipe(gulp.dest(project.distFolder))
@@ -62,7 +81,8 @@
   gulp.task('connect', function () {
     connect.server({
       root: project.distFolder,
-      livereload: true
+      livereload: true,
+      port: project.port
     });
   });
 
@@ -73,7 +93,7 @@
   });
 
   gulp.task('copy-images', function () {
-    gulp.src(project.devFolder + '/images/*.*')
+    gulp.src(project.devFolder + '/**/*.png')
       .pipe(gulp.dest(project.distFolder));
   });
 
@@ -105,10 +125,10 @@
 /*******************
 * MAIN TASKS
 *******************/
-  gulp.task('dev', ['connect', 'views', 'scripts', 'browserify', 'scss', 'copy-images', 'watch']);
+  gulp.task('dev', ['connect', 'views', /*'scripts',*/ 'browserify', 'scss', 'copy-images', 'watch']);
 
   gulp.task('test', ['karma']);
 
-  gulp.task('build', ['views', 'scripts', 'browserify', 'scss', 'copy-images']);
+  gulp.task('build', ['views', /*'scripts',*/ 'browserify', 'scss', 'copy-images']);
 
 }());
