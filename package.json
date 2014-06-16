@@ -6,7 +6,8 @@
   "scripts": {
     "start": "gulp dev",
     "test": "test",
-    "dev": "gulp dev"
+    "dev": "gulp dev",
+	"build": "gulp build"
   },
   "author": "Raimo Pitkänen",
   "license": "ISC",
