@@ -33,7 +33,7 @@
             debug: true
           }))
           .pipe(rename('bundle.js'))
-          .pipe(gulp.dest(project.distFolder))          
+          .pipe(gulp.dest(project.distFolder))
           .pipe(connect.reload());
   });
 
@@ -41,6 +41,10 @@
     gulp.src(project.devFolder + '/**/*.js')
       .pipe(sourcemaps.init())
         .pipe(concat('project.js'))
+        .pipe(browserify({
+          insertGlobals: true,
+          debug: true
+        }))
         .pipe(uglify())
       .pipe(sourcemaps.write())
       .pipe(gulp.dest(project.distFolder))
