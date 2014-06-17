@@ -127,7 +127,7 @@
 *******************/
   gulp.task('dev', ['connect', 'views', /*'scripts',*/ 'browserify', 'scss', 'copy-images', 'watch']);
 
-  gulp.task('test', ['karma']);
+  gulp.task('test', ['test-e2e']);
 
   gulp.task('build', ['views', /*'scripts',*/ 'browserify', 'scss', 'copy-images']);
 
