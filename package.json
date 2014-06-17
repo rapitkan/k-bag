@@ -5,13 +5,14 @@
   "main": "index.js",
   "scripts": {
     "start": "gulp dev",
-    "test": "test",
+    "test": "gulp test",
     "dev": "gulp dev",
-	"build": "gulp build"
+    "build": "gulp build"
   },
   "author": "Raimo Pitkänen",
   "license": "ISC",
   "devDependencies": {
+    "astrolabe": "^0.3.4-alpha",
     "browserify": "^4.1.8",
     "browserify-watcher": "^2.1.1",
     "debowerify": "^0.7.1",
@@ -33,6 +34,7 @@
     "gulp-sourcemaps": "^0.4.0",
     "gulp-uglify": "^0.3.0",
     "gulp-util": "^2.2.16",
+    "jasmine-reporters": "^0.4.1",
     "jshint-stylish": "^0.2.0",
     "karma": "^0.12.16",
     "karma-browserify": "^0.2.1",
@@ -47,9 +49,7 @@
     "karma-safari-launcher": "^0.1.1",
     "mocha": "^1.20.1",
     "protractor": "^0.24.1",
-    "vinyl-source-stream": "^0.1.1",
-    "selenium-server": "2.38.0",
-    "jasmine-reporters": "0.4.1",
-    "astrolabe": "0.3.4-alpha"
+    "selenium-server": "^2.38.0",
+    "vinyl-source-stream": "^0.1.1"
   }
 }
