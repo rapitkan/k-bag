@@ -35,20 +35,6 @@
           .pipe(rename('bundle.js'))
           .pipe(gulp.dest(project.distFolder))          
           .pipe(connect.reload());
-      gulp.src(project.devFolder + '/modules/login/loginService.js')
-          .pipe(browserify({
-            insertGlobals: true,
-            debug: true
-          }))
-          .pipe(gulp.dest(project.distFolder))
-          .pipe(connect.reload());
-      gulp.src(project.devFolder + '/modules/login/loginController.js')
-          .pipe(browserify({
-            insertGlobals: true,
-            debug: true
-          }))          
-          .pipe(gulp.dest(project.distFolder))
-          .pipe(connect.reload());
   });
 
   gulp.task('scripts', function () {
