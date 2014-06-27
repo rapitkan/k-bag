@@ -108,7 +108,7 @@
     // Watch the main js file
     gulp.watch([project.devFolder + '/index.js', project.devFolder + '/**/*.js'], { maxListeners: 999}, ['browserify']);
     // Watch scss files
-    gulp.watch([project.devFolder + '/index.scss', project.devFolder + '/styles/*_scss'], { maxListeners: 999}, ['scss']);    
+    gulp.watch([project.devFolder + '/index.scss', project.devFolder + '/styles/*.scss'], { maxListeners: 999}, ['scss']);    
   });
 
 /*******************
