@@ -79,7 +79,8 @@
   });
 
   gulp.task('copy-images', function () {
-    gulp.src(project.devFolder + '/**/*.*')
+    gulp.src([project.devFolder + '/**/*.png',
+              project.devFolder + '/**/*.JPG'])
       .pipe(gulp.dest(project.distFolder));
   });
 
