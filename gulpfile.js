@@ -60,8 +60,8 @@
   gulp.task('views', function () {
     gulp.src([project.devFolder + '/index.jade', project.devFolder + '/**/*.jade'])
         .pipe(jade())
-        .pipe(connect.reload())
-        .pipe(gulp.dest(project.distFolder));
+        .pipe(gulp.dest(project.distFolder))
+        .pipe(connect.reload());
   });
 
   gulp.task('connect', function () {
@@ -75,7 +75,8 @@
   gulp.task('scss', function () {
     gulp.src([project.devFolder + '/index.scss'])
       .pipe(scss({sourcemap: true}))
-      .pipe(gulp.dest(project.distFolder));
+      .pipe(gulp.dest(project.distFolder))
+      .pipe(connect.reload());
   });
 
   gulp.task('copy-images', function () {
