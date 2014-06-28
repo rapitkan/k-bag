@@ -81,7 +81,8 @@
 
   gulp.task('copy-images', function () {
     gulp.src([project.devFolder + '/**/*.png',
-              project.devFolder + '/**/*.JPG'])
+              project.devFolder + '/**/*.JPG',
+              project.devFolder + '/**/*.jpg'])
       .pipe(gulp.dest(project.distFolder));
   });
 
