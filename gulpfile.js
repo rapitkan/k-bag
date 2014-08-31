@@ -60,8 +60,8 @@
   gulp.task('views', function () {
     gulp.src([project.devFolder + '/index.jade', project.devFolder + '/**/*.jade'])
         .pipe(jade())
-        .pipe(connect.reload())
-        .pipe(gulp.dest(project.distFolder));
+        .pipe(gulp.dest(project.distFolder))
+        .pipe(connect.reload());
   });
 
   gulp.task('connect', function () {
@@ -75,11 +75,14 @@
   gulp.task('scss', function () {
     gulp.src([project.devFolder + '/index.scss'])
       .pipe(scss({sourcemap: true}))
-      .pipe(gulp.dest(project.distFolder));
+      .pipe(gulp.dest(project.distFolder))
+      .pipe(connect.reload());
   });
 
   gulp.task('copy-images', function () {
-    gulp.src(project.devFolder + '/**/*.png')
+    gulp.src([project.devFolder + '/**/*.png',
+              project.devFolder + '/**/*.JPG',
+              project.devFolder + '/**/*.jpg'])
       .pipe(gulp.dest(project.distFolder));
   });
 
@@ -106,6 +109,8 @@
     gulp.watch([project.devFolder +'/index.jade', project.devFolder + '/**/*.jade'], { maxListeners: 999 }, ['views']);
     // Watch the main js file
     gulp.watch([project.devFolder + '/index.js', project.devFolder + '/**/*.js'], { maxListeners: 999}, ['browserify']);
+    // Watch scss files
+    gulp.watch([project.devFolder + '/index.scss', project.devFolder + '/styles/*.scss'], { maxListeners: 999}, ['scss']);    
   });
 
 /*******************
