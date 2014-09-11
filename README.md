@@ -8,4 +8,4 @@ Follow these steps to get it working:
     => k-bag folder will be created under your project's directory.
 4) Navigate to the k-bag directory and run 'git submodule update --init'
     => This will fetch the Once css library source codes from GitHub.
-5) In the k-bag directory, run: npm start
+5) In the k-bag directory, run: npm start 
