@@ -1,6 +1,6 @@
 This is a project template for AngularJS, browserify and Once CSS library.
 
-Follow these steps to get it working:
+Follow these small steps to get it running:
 
 Pre-conditions: NodeJS, npm and bower are installed.
 
@@ -26,8 +26,30 @@ Pre-conditions: NodeJS, npm and bower are installed.
 
   `bower install`
 
-6. In the k-bag directory, run
+7. Navigate back to your project's folder.
+
+8. Create a file named as projectStructure.json. This is an example of it:
+
+{
+  "devFolder": "../app",
+  "distFolder": "../dist",
+  "port": 35000,
+  "copy": [{
+    "src": "/images/*.*",
+    "base": "/images/"
+  }, {
+    "src": "/images/pictures/*.*",
+    "base": "/images/pictures/"
+  }, {
+    "src": "/songs/*.*",
+    "base": "/songs/"
+  }]
+}
+
+The devFolder is the folder where the source files of your application are going to locate. It's relative to k-bag folder. The distFolder is the folder where your built application will locate. Like the devFolder the distFolder's path is also relative to k-bag folder. In a copy section you can specify any files which will be copied under from devFolder to distFolder.
+
+9. In the k-bag directory, run
 
   `npm start`
 
-7. Have fun!!
+10. Have fun!!
