@@ -16,4 +16,6 @@ Follow these steps to get it working:
   
     => This will fetch the Once css library source codes from GitHub.
 
-5. In the k-bag directory, run: npm start
+5. In the k-bag directory, run
+
+  `npm start`
