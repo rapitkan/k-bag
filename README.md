@@ -30,7 +30,7 @@ Pre-conditions: NodeJS, npm and bower are installed.
 
 8. Create a file named as projectStructure.json. This is an example of it:
 
-{
+`{
   "devFolder": "../app",
   "distFolder": "../dist",
   "port": 35000,
